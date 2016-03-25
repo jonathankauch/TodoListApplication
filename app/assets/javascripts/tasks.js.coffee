@@ -21,7 +21,7 @@ $ ->
       $block.toggleClass('hidden')
       $block.find('p').text(@content)
       $block.find('.suppress-icon').attr('href', @task_path)
-      $block.find('.status-icon').attr('href', @switch_status_url)
+      $block.find('.status-btn').attr('href', @switch_status_url)
       console.log $block
       return $block
 
