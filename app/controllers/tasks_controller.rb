@@ -101,7 +101,7 @@ class TasksController < ApplicationController
     status = @task.status == 1 ? 0 : 1
     respond_to do |format|
       if @task.update_attribute :status, status
-        format.json { render json: @task, status: :accepted}
+        format.json { render json: @task, status: :accepted }
       else
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
@@ -112,41 +112,19 @@ class TasksController < ApplicationController
   def completed_tasks
     @tasks = Task.completed
 
-    send_tasks_formatted_in_json(@tasks)
+    render 'formatted_tasks'
   end
 
   # GET /tasks/completed
   def inprogress_tasks
     @tasks = Task.in_progress
-    send_tasks_formatted_in_json(@tasks)
+
+    render 'formatted_tasks'
   end
 
   def all_tasks
     @tasks = Task.all
-    send_tasks_formatted_in_json(@tasks)
-  end
 
-  private
-
-  def send_tasks_formatted_in_json(items)
-    return false if items.empty?
-    data = []
-    items.each do |task|
-      tmp = {
-        task: task,
-        url: {
-          switch_status: task_switch_status_path(task.id),
-          delete: task_path(task)
-        }
-      }
-      data << tmp
-    end
-    respond_to do |format|
-      if data == false
-        format.json { render json: @task.errors, status: :unprocessable_entity }
-      else
-        format.json { render json: data, status: :accepted }
-      end
-    end
+    render 'formatted_tasks'
   end
 end
