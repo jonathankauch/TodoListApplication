@@ -10,9 +10,8 @@
         .form-group
           label
             | Your task :
-          |  <input type='text' class='content-field form-control' name='task-content' placeholder="Your new task .o." data-url="
-          = tasks_path
-          | "/> 
+          input type='text' class='content-field form-control' name='task-content' placeholder="Your new task .o." data-url=tasks_path
+    
         .option-container
           h4
             |  Filter 
@@ -27,22 +26,14 @@
               = link_to 'Clear all', clear_all_tasks_path, method: :delete, class: 'clear-all-btn', data: { confirm: 'Are you sure?', remote: true }
         .task-list
           - @tasks.each do |task|
-            - if task.status == 1
-              #task-<ruby code="= task.id"></ruby>.bs-callout.bs-callout-info
-
-            - else
-              #task-<ruby code="= task.id"></ruby>.bs-callout.bs-callout-success
-
-            h4
-              |  Task : 
-            p
-              = task.content
-            .suppress-icon
-              = link_to task, method: :delete, class: 'suppress-btn', data: { confirm: 'Are you sure?', remote: true } do
-                i.fa.fa-times
-            .status-icon
-              = link_to task_switch_status_path(task), method: 'PUT', class: 'status-btn', remote: true do
-                - if task.status == 0
-                  i.fa.fa-2x.fa-thumbs-o-up.checked
-                - else
-                  i.fa.fa-2x.fa-thumbs-o-up
+            .bs-callout id="task-#{task.id}" class="bs-callout-#{ task.status == 1 ? 'info' : 'success'}"
+              h4
+                |  Task : 
+              p
+                = task.content
+              .suppress-icon
+                = link_to task, method: :delete, class: 'suppress-btn', data: { confirm: 'Are you sure?', remote: true }
+                  i.fa.fa-times
+              .status-icon
+                = link_to task_switch_status_path(task), method: 'PUT', class: 'status-btn', remote: true
+                  i.fa.fa-2x.fa-thumbs-o-up class=" #{ task.status == 0 ? 'checked' : '' }"
