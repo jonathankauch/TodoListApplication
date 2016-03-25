@@ -44,14 +44,9 @@ class TasksController < ApplicationController
 
     respond_to do |format|
       if @task.save
-        data = {
-          task: @task,
-          url: {
-            switch_status: task_switch_status_path(@task.id),
-            delete: task_path(@task)
-          }
-        }
-        format.json { render json: data, status: :created }
+        format.json do
+          render 'create'
+        end
       else
         format.json { render json: @task.errors, status: :unprocessable_entity }
       end
