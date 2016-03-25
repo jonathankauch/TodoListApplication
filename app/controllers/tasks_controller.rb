@@ -2,7 +2,7 @@ class TasksController < ApplicationController
   # GET /tasks
   # GET /tasks.json
   def index
-    @tasks = Task.all
+    @tasks = Task.order('id DESC')
 
     respond_to do |format|
       format.html # index.html.erb
@@ -19,22 +19,6 @@ class TasksController < ApplicationController
       format.html # show.html.erb
       format.json { render json: @task }
     end
-  end
-
-  # GET /tasks/new
-  # GET /tasks/new.json
-  def new
-    @task = Task.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @taks }
-    end
-  end
-
-  # GET /tasks/1/edit
-  def edit
-    @task = Task.find(params[:id])
   end
 
   # POST /tasks
