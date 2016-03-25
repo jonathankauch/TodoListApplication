@@ -7,7 +7,7 @@ gem 'rails', '3.2.17'
 
 gem 'sqlite3'
 gem 'bootstrap-sass', '3.1.1.0'
-gem 'jbuilder', '~> 2.4', '>= 2.4.1'
+gem 'jbuilder'
 gem 'database_cleaner', '~> 1.5', '>= 1.5.1'
 
 # Gems used only for assets and not required
