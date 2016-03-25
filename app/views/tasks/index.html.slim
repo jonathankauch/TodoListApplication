@@ -31,10 +31,10 @@
             p
             |
             .suppress-icon
-              a.suppress-btn href='' data-remote='true' data-method='DELETE' data-confirm='You sure buddy ?'
+              a.suppress-btn href='' data-remote='true' data-method='delete' data-confirm='You sure buddy ?'
                 i.fa.fa-times
             .status-icon
-              a.status-btn href='' data-remote='true' data-method='PUT'
+              a.status-btn href='' data-remote='true' data-method='put'
                 i.fa.fa-2x.fa-thumbs-o-up
           - @tasks.each do |task|
             = render 'task', task: task
