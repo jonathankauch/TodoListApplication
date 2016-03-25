@@ -3,6 +3,9 @@
 # You can use CoffeeScript in this file: http://jashkenas.github.com/coffee-script/
 
 $ ->
+
+  KEY_ENTER = 13
+
   addToTaskList = (data) ->
     id = data.task.id
     content = data.task.content
@@ -39,28 +42,19 @@ $ ->
 
   removeAllTask = ->
     $('.bs-callout').each ->
-      $(@).fadeOut 1000
-      $(@).remove
-
-  $('.task-list').on 'ajax:success', 'div a.suppress-btn', (event, data, status, xhr) ->
-    $(event.target).closest('div.bs-callout').fadeOut 1000, () ->
       $(@).remove()
-    $.notify("Your task has been deleted !", 'success');
 
-  $('.task-completed-btn').on 'ajax:success', (event, data, status, xhr) ->
-    removeAllTask()
-    addToTaskList(item) for item in data
-
-  $('.task-inprogress-btn').on 'ajax:success', (event, data, status, xhr) ->
-    removeAllTask()
-    addToTaskList(item) for item in data
-
-  $('.task-all-btn').on 'ajax:success', (event, data, status, xhr) ->
+  $('.task-inprogress-btn, .task-all-btn, .task-completed-btn').on 'ajax:success', (event, data, status, xhr) ->
     removeAllTask()
     addToTaskList(item) for item in data
 
   $('.clear-all-btn').on 'ajax:success', (event, data, status, xhr) ->
     removeAllTask()
+
+  $('.task-list').on 'ajax:success', 'div a.suppress-btn', (event, data, status, xhr) ->
+    $(event.target).closest('div.bs-callout').fadeOut 1000, () ->
+      $(@).remove()
+    $.notify("Your task has been deleted !", 'success');
 
   $('.task-list').on 'ajax:success', 'div a.status-btn', (event, data, status, xhr) ->
     $parent = $(event.target).closest('div.bs-callout')
@@ -75,6 +69,8 @@ $ ->
       $parent.addClass('bs-callout-info')
       $.notify("Your task is in progress !", 'success');
 
+  $('.task-list').on 'ajax:error', (event, xhr, status, error) ->
+    $.notify("Cannot access to the task !", 'error')
 
   $('.content-field').keyup (e) ->
     if e.keyCode is KEY_ENTER
