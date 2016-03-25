@@ -1,13 +1,1 @@
-p#notice
-  = notice
-p
-  b
-    | Content:
-  = @task.content
-p
-  b
-    | Status:
-  = @task.status
-= link_to 'Edit', edit_task_path(@task)
-|  | 
-= link_to 'Back', tasks_path
+= render 'task', task: @task

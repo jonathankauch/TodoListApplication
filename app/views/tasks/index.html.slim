@@ -25,15 +25,16 @@
             li
               = link_to 'Clear all', clear_all_tasks_path, method: :delete, class: 'clear-all-btn', data: { confirm: 'Are you sure?', remote: true }
         .task-list
+          .bs-callout.hidden
+            h4
+              |  Task : 
+            p
+            |
+            .suppress-icon
+              a.suppress-btn href='' data-remote='true' data-method='DELETE' data-confirm='You sure buddy ?'
+                i.fa.fa-times
+            .status-icon
+              a.status-btn href='' data-remote='true' data-method='PUT'
+                i.fa.fa-2x.fa-thumbs-o-up
           - @tasks.each do |task|
-            .bs-callout id="task-#{task.id}" class="bs-callout-#{ task.status == 1 ? 'info' : 'success'}"
-              h4
-                |  Task : 
-              p
-                = task.content
-              .suppress-icon
-                = link_to task, method: :delete, class: 'suppress-btn', data: { confirm: 'Are you sure?', remote: true }
-                  i.fa.fa-times
-              .status-icon
-                = link_to task_switch_status_path(task), method: 'PUT', class: 'status-btn', remote: true
-                  i.fa.fa-2x.fa-thumbs-o-up class=" #{ task.status == 0 ? 'checked' : '' }"
+            = render 'task', task: task
