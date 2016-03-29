@@ -4,7 +4,7 @@ class TasksController < ApplicationController
   def index
     @tasks = Task.order('id DESC')
 
-    respond_to do |format|
+    respond_to |format|
       format.html # index.html.erb
       format.json { render json: @tasks }
     end

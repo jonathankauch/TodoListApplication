@@ -1,12 +1,13 @@
 Todo::Application.routes.draw do
-  resources :tasks do
-    delete 'clear_all', on: :collection
+  resources :tasks, except: %i(show new edit) do
+    collection do
+      get 'completed' => 'tasks#completed_tasks'
+      get 'inprogress' => 'tasks#inprogress_tasks'
+      get 'all' => 'tasks#all_tasks'
+      delete 'clear_all'
+    end
     put 'switch_status' => 'tasks#switch_status'
   end
-
-  get 'completed_tasks' => 'tasks#completed_tasks'
-  get 'inprogress_tasks' => 'tasks#inprogress_tasks'
-  get 'all_tasks' => 'tasks#all_tasks'
 
   root to: 'tasks#index'
 

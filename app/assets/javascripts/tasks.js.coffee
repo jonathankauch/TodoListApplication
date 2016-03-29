@@ -29,38 +29,6 @@ $ ->
     task = new Task data.task.id, data.task.content, data.task.status, data.url.switch_status, data.url.task
     $block = task.build()
     $('.task-list').prepend($block)
-    # id = data.task.id
-    # content = data.task.content
-    # url_delete = data.url.delete
-    # url_switch_status = data.url.switch_status
-    #
-    # if data.task.status is 0
-    #   status = 'success'
-    #   checked = 'checked'
-    # else
-    #   status = 'info'
-    #   checked = ''
-    #
-    # $('.task-list').prepend("
-    #   <div id='task-" + id + "' class='bs-callout bs-callout-" + status + "'>
-    #     <h4>
-    #       Task:
-    #     </h4>
-    #     <p>
-    #     " + content + "
-    #     </p>
-    #     <div class='suppress-icon'>
-    #       <a href='"+ url_delete + "' class='suppress-btn' data-method='DELETE' data-remote='true'>
-    #         <i class='fa fa-times'></i>
-    #       </a>
-    #     </div>
-    #     <div class='status-icon'>
-    #       <a href='"+ url_switch_status + "' class='status-btn' data-method='PUT' data-remote='true'>
-    #         <i class='fa fa-2x fa-thumbs-o-up " + checked + "'></i>
-    #       </a>
-    #     </div>
-    #   </div>
-    # ")
 
   removeAllTask = ->
     $('.bs-callout-info, .bs-callout-success').each ->
